@@ -23,23 +23,24 @@ public class Application {
         int points =0;
         while (questions < 10) {
             try{
+                //Generate random number as ID for question
                 Random rand = new Random();
                 int randomNumber = rand.nextInt(100) + 1;
-
+                //Make get request to get random clue
                 String randomClue = CustomHttpClient.sendGET("https://jservice.kenzie.academy/api/clues/" + randomNumber);
 
                 ObjectMapper objectMapper = new ObjectMapper();
                 Clues clue = objectMapper.readValue(randomClue, Clues.class);
-
-
 
                 System.out.println("Category: "+clue.getCategory().getTitle()+" Question: "+clue.getQuestion());
                 Scanner scan = new Scanner(System.in);
                 System.out.println("Enter your answer: ");
                 String answer = scan.nextLine();
                 checkForEmptyString(answer);
+
                 String correctAnswer = clue.getAnswer().replaceAll("\\s","");
                 answer= answer.replaceAll("\\s","");
+
                 if (answer.equalsIgnoreCase(correctAnswer)){
                     System.out.println("Correct Answer!");
                     points++;
@@ -47,7 +48,6 @@ public class Application {
                 else {
                     System.out.println("Sorry! That answer was incorrect. The correct answer is "+ clue.getAnswer());
                 }
-
 
             }
             catch (CustomEmptyStringException e){
@@ -58,8 +58,8 @@ public class Application {
         System.out.println("Your total points are: "+points);
     }
     public static void checkForEmptyString(String input){
-        if (input.isEmpty()){
-            throw new CustomEmptyStringException("Invalid input: Empty string entered.");
+        if (input.isEmpty()|| input.matches("^\\s*$")){
+            throw new CustomEmptyStringException("Invalid input: Empty string entered. A new question will be provided.");
         }
 
     }
