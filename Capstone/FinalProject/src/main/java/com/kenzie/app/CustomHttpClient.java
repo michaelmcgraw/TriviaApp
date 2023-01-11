@@ -24,7 +24,6 @@ public class CustomHttpClient {
             if (statusCode == 200) {
                 return httpResponse.body();
             } else {
-                // String.format is fun! Worth a Google if you're interested
                 return String.format("GET request failed: %d status code received", statusCode);
             }
         } catch (IOException | InterruptedException e) {

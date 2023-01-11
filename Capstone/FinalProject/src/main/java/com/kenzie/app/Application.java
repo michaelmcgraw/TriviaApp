@@ -19,10 +19,10 @@ public class Application {
      */
     public static void main(String[] args) throws JsonProcessingException {
         //Write main execution code here
-        int questions = 0;
+        int questions = 1;
         int points =0;
         //loops until 10 questions are asked
-        while (questions < 10) {
+        while (questions < 11) {
             try{
                 //Generate random number as ID for question
                 Random rand = new Random();
@@ -33,7 +33,7 @@ public class Application {
                 ObjectMapper objectMapper = new ObjectMapper();
                 Clues clue = objectMapper.readValue(randomClue, Clues.class);
                 //Print Category/Question
-                System.out.println("Category: "+clue.getCategory().getTitle()+" Question: "+clue.getQuestion());
+                System.out.println("Question "+questions+": "+"Category: "+clue.getCategory().getTitle()+" Question: "+clue.getQuestion());
                 Scanner scan = new Scanner(System.in);
                 //User enters answer
                 System.out.println("Enter your answer: ");
@@ -55,6 +55,7 @@ public class Application {
             }
             catch (CustomEmptyStringException e){
                 System.out.println(e.getMessage());
+                questions--;
             }
             questions++;
         }
