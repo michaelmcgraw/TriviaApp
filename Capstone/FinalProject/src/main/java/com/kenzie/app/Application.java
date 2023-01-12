@@ -18,6 +18,7 @@ public class Application {
        - The rest is up to you. Good luck and happy coding!
      */
     static int finalScore;
+    final static String URLSTRING = "https://jservice.kenzie.academy/api/clues/";
     public static void main(String[] args) throws JsonProcessingException {
         //Write main execution code here
         //loops until 10 questions are asked AND answered
@@ -26,9 +27,9 @@ public class Application {
             try{
                 //Generate random number as ID for question
                 Random rand = new Random();
-                int randomNumber = rand.nextInt(100) + 1;
+                int randomNumber = rand.nextInt(355237) + 1;
                 //Make get request to get random clue
-                String randomClue = CustomHttpClient.sendGET("https://jservice.kenzie.academy/api/clues/" + randomNumber);
+                String randomClue = CustomHttpClient.sendGET(URLSTRING + randomNumber);
                 //Convert from JSON to DTO
                 ObjectMapper objectMapper = new ObjectMapper();
                 Clues clue = objectMapper.readValue(randomClue, Clues.class);
