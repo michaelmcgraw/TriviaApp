@@ -17,11 +17,11 @@ public class Application {
        - Your program execution must run from the main() method in Main.java
        - The rest is up to you. Good luck and happy coding!
      */
+    static int finalScore;
     public static void main(String[] args) throws JsonProcessingException {
         //Write main execution code here
+        //loops until 10 questions are asked AND answered
         int questions = 1;
-        int points =0;
-        //loops until 10 questions are asked
         while (questions < 11) {
             try{
                 //Generate random number as ID for question
@@ -34,6 +34,7 @@ public class Application {
                 Clues clue = objectMapper.readValue(randomClue, Clues.class);
                 //Print Category/Question
                 System.out.println("Question "+questions+": "+"Category: "+clue.getCategory().getTitle()+" Question: "+clue.getQuestion());
+                System.out.println("Debug: Correct answer is: "+clue.getAnswer());
                 Scanner scan = new Scanner(System.in);
                 //User enters answer
                 System.out.println("Enter your answer: ");
@@ -46,7 +47,7 @@ public class Application {
                 //checks if user entered correct answer
                 if (answer.equalsIgnoreCase(correctAnswer)){
                     System.out.println("Correct Answer!");
-                    points++;
+                    finalScore++;
                 }
                 else {
                     System.out.println("Sorry! That answer was incorrect. The correct answer is "+ clue.getAnswer());
@@ -60,7 +61,7 @@ public class Application {
             questions++;
         }
         //prints out total points
-        System.out.println("Your total points are: "+points);
+        System.out.println("Your total points are: "+finalScore);
     }
     public static void checkForEmptyString(String input){
         if (input.isEmpty()|| input.matches("^\\s*$")){
