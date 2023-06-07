@@ -9,15 +9,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Application {
-    /* Java Fundamentals Capstone project:
-       - Define as many variables, properties, and methods as you decide are necessary to
-       solve the program requirements.
-       - You are not limited to only the class files included here
-       - You must write the HTTP GET call inside the CustomHttpClient.sendGET(String URL) method
-         definition provided
-       - Your program execution must run from the main() method in Main.java
-       - The rest is up to you. Good luck and happy coding!
-     */
+
     static int finalScore;
     final static String URLSTRING = "https://jservice.kenzie.academy/api/clues/";
     public static void main(String[] args) throws JsonProcessingException {
@@ -37,7 +29,6 @@ public class Application {
                 Clues clue = objectMapper.readValue(randomClue, Clues.class);
                 //Print Category/Question
                 System.out.println("Question "+questions+": "+"Category: "+clue.getCategory().getTitle()+" Question: "+clue.getQuestion());
-                System.out.println("Debug: Correct answer is: "+clue.getAnswer());
                 Scanner scan = new Scanner(System.in);
                 //User enters answer
                 System.out.println("Enter your answer: ");
